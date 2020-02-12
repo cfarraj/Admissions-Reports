@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Admissions Reports", "Admissions Reports\Admissions Reports.rptproj", "{B1FAC064-79C8-4F2D-9293-ACB441B46C57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Debug|Default.ActiveCfg = Debug
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Debug|Default.Build.0 = Debug
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Debug|Default.Deploy.0 = Debug
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.DebugLocal|Default.Build.0 = DebugLocal
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Release|Default.ActiveCfg = Release
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Release|Default.Build.0 = Release
+		{B1FAC064-79C8-4F2D-9293-ACB441B46C57}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F63B1931-0789-49AD-AF37-03B6889519A4}
+	EndGlobalSection
+EndGlobal
