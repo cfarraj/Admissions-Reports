@@ -4,7 +4,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="rptDataSource">
-      <DataSourceReference>CampusVueDatabase</DataSourceReference>
+      <DataSourceReference>CN-SIS Prod</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>6d28ad3f-6cb5-4a65-919f-2a8adfaa8219</rd:DataSourceID>
     </DataSource>
@@ -17,8 +17,12 @@
           <QueryParameter Name="@ARbalanceFrom">
             <Value>=Parameters!ARbalanceFrom.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@UserId">
+            <Value>=Parameters!UserId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
           <QueryParameter Name="@ARbalanceTo">
-            <Value>=Parameters!ARBalanceTo.Value</Value>
+            <Value>=Parameters!ARbalanceTo.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@EnrollDateFrom">
             <Value>=Parameters!EnrollDateFrom.Value</Value>
@@ -53,36 +57,32 @@
           <QueryParameter Name="@EvalReEntry">
             <Value>=Parameters!EvalReEntry.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@ProgramVersionCSV">
-            <Value>=Join(Parameters!ProgramVersions.Value,",")</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ApplicantTypeCSV">
-            <Value>=JOIN(Parameters!ApplicantTypes.Value,",")</Value>
-          </QueryParameter>
           <QueryParameter Name="@CampusCSV">
-            <Value>=join(Parameters!Campuses.Value,",")</Value>
-          </QueryParameter>
-          <QueryParameter Name="@SchoolStatusCSV">
-            <Value>=join(Parameters!SchoolStatuses.Value,",")</Value>
-          </QueryParameter>
-          <QueryParameter Name="@PrevEducCSV">
-            <Value>=join(Parameters!PreviousEducationCodes.Value,",")</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ProgramCSV">
-            <Value>=join(Parameters!Programs.Value,",")</Value>
-          </QueryParameter>
-          <QueryParameter Name="@AdmRepCSV">
-            <Value>=join(Parameters!AdmissionsReps.Value,",")</Value>
+            <Value>=Parameters!CampusCSV.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@ShiftCSV">
-            <Value>=join(Parameters!Shifts.Value,",")</Value>
+            <Value>=Parameters!ShiftCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@SchoolStatusCSV">
+            <Value>=Parameters!SchoolStatusCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ProgramCSV">
+            <Value>=Parameters!ProgramCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ProgramVersionCSV">
+            <Value>=Parameters!ProgramVersionCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@AdmRepCSV">
+            <Value>=Parameters!AdmRepCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@PrevEducCSV">
+            <Value>=Parameters!PrevEducCSV.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ApplicantTypeCSV">
+            <Value>=Parameters!ApplicantTypeCSV.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@PrintID">
             <Value>=Parameters!PrintID.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@UserId">
-            <Value>=Parameters!UserId.Value</Value>
-            <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
@@ -92,6 +92,14 @@
         <Field Name="StudentName">
           <DataField>StudentName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PrintID">
+          <DataField>PrintID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SyStudentID">
+          <DataField>SyStudentID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="OriginalStartDate">
           <DataField>OriginalStartDate</DataField>
@@ -141,6 +149,14 @@
           <DataField>Campus</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SyCampusID">
+          <DataField>SyCampusID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AdmRep">
+          <DataField>AdmRep</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="LeadSrc">
           <DataField>LeadSrc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -149,10 +165,6 @@
           <DataField>MinBudget</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="AdmRep">
-          <DataField>AdmRep</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="MaxBudget">
           <DataField>MaxBudget</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -160,10 +172,6 @@
         <Field Name="PackagingStatus">
           <DataField>PackagingStatus</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SyStudentID">
-          <DataField>SyStudentID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="CurrentEnrollmentInfo">
           <DataField>CurrentEnrollmentInfo</DataField>
@@ -180,14 +188,6 @@
         <Field Name="OriginalExpStartDate">
           <DataField>OriginalExpStartDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PrintID">
-          <DataField>PrintID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="syCampusID">
-          <DataField>SyCampusID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SyStudentIdsForGroup">
           <DataField>SyStudentIdsForGroup</DataField>
@@ -4287,7 +4287,7 @@ format(Fields!ExpStartDate.Value,"M/d/yyyy"))</Value>
       <AllowBlank>true</AllowBlank>
       <Prompt>A/R Balance From</Prompt>
     </ReportParameter>
-    <ReportParameter Name="ARBalanceTo">
+    <ReportParameter Name="ARbalanceTo">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt> A/R Balance To</Prompt>
@@ -4416,6 +4416,38 @@ format(Fields!ExpStartDate.Value,"M/d/yyyy"))</Value>
       </DefaultValue>
       <Prompt>To</Prompt>
     </ReportParameter>
+    <ReportParameter Name="CampusCSV">
+      <DataType>String</DataType>
+      <Prompt>Campus CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShiftCSV">
+      <DataType>String</DataType>
+      <Prompt>Shift CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SchoolStatusCSV">
+      <DataType>String</DataType>
+      <Prompt>School Status CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ProgramCSV">
+      <DataType>String</DataType>
+      <Prompt>Program CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ProgramVersionCSV">
+      <DataType>String</DataType>
+      <Prompt>Program Version CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AdmRepCSV">
+      <DataType>String</DataType>
+      <Prompt>Adm Rep CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PrevEducCSV">
+      <DataType>String</DataType>
+      <Prompt>Prev Educ CSV</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ApplicantTypeCSV">
+      <DataType>String</DataType>
+      <Prompt>Applicant Type CSV</Prompt>
+    </ReportParameter>
     <ReportParameter Name="StudentIDs">
       <DataType>String</DataType>
       <DefaultValue>
@@ -4442,7 +4474,7 @@ format(Fields!ExpStartDate.Value,"M/d/yyyy"))</Value>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>10</NumberOfRows>
+      <NumberOfRows>12</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -4462,122 +4494,162 @@ format(Fields!ExpStartDate.Value,"M/d/yyyy"))</Value>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>SchoolStatuses</ParameterName>
+          <ParameterName>Programs</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Programs</ParameterName>
+          <ParameterName>filterDescription</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
+          <ParameterName>SchoolStatuses</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
           <ParameterName>ProgramVersions</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>AdmissionsReps</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>PreviousEducationCodes</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>ARbalanceFrom</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>ARBalanceTo</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>1</RowIndex>
           <ParameterName>ApplicantTypes</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>EnrollDateFrom</ParameterName>
+          <RowIndex>3</RowIndex>
+          <ParameterName>AdmissionsReps</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>EnrollDateTo</ParameterName>
+          <RowIndex>3</RowIndex>
+          <ParameterName>PreviousEducationCodes</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
-          <RowIndex>2</RowIndex>
+          <RowIndex>1</RowIndex>
           <ParameterName>EvalReEntry</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>StartDateFrom</ParameterName>
+          <RowIndex>4</RowIndex>
+          <ParameterName>ARbalanceFrom</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>StartDateTo</ParameterName>
+          <RowIndex>4</RowIndex>
+          <ParameterName>ARbalanceTo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
-          <RowIndex>3</RowIndex>
+          <RowIndex>2</RowIndex>
           <ParameterName>PrintID</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>EnrollDateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>EnrollDateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>StartDateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>StartDateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>GradDateFrom</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>6</RowIndex>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>7</RowIndex>
           <ParameterName>GradDateTo</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
+          <ColumnIndex>2</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>ExpStartDateFrom</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>7</RowIndex>
-          <ParameterName>ExpStartDateTo</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>InternalUser</ParameterName>
+          <ParameterName>ExpStartDateTo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>OrigExpStartDateFrom</ParameterName>
+          <ParameterName>InternalUser</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>OrigExpStartDateTo</ParameterName>
+          <ParameterName>OrigExpStartDateFrom</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>StudentIDs</ParameterName>
+          <ParameterName>OrigExpStartDateTo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>9</RowIndex>
-          <ParameterName>useCmcSelectionPane</ParameterName>
+          <ParameterName>CampusCSV</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>filterDescription</ParameterName>
+          <ParameterName>ShiftCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>SchoolStatusCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>ProgramCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>ProgramVersionCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>AdmRepCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>PrevEducCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>ApplicantTypeCSV</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>StudentIDs</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>11</RowIndex>
+          <ParameterName>useCmcSelectionPane</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
